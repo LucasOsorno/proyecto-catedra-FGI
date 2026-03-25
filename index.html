@@ -3,43 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto - Física de las Grandes Ideas</title>
+    <title>Aburrá Physics - Levitación Hidrodinámica</title>
     <style>
+        /* CSS Integrado - Diseño Moderno y Elegante */
+        :root {
+            --primario: #002D62; /* Navy blue */
+            --secundario: #00BFFF; /* Cyan */
+            --fondo-claro: #F4F4F9;
+            --texto-oscuro: #222222;
+            --blanco: #FFFFFF;
+            --sombra: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--texto-oscuro);
+            background-color: var(--fondo-claro);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        header {
+            background-color: var(--blanco);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--sombra);
+            position: fixed;
+            width: calc(100% - 100px);
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primario);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primario), var(--secundario));
+            border-radius: 50%;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primario);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secundario);
+        }
+
+        /* Sección Héroe (Portada) */
+        .hero {
+            background-color: var(--primario);
+            color: var(--blanco);
+            padding: 150px 10% 80px;
             text-align: center;
-            margin-top: 50px;
-            background-color: #f4f4f9;
+            background-image: linear-gradient(180deg, var(--primario) 70%, #001A3D 100%);
+            margin-top: 80px;
         }
-        .container {
-            background-color: white;
-            padding: 40px;
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero .highlight {
+            color: var(--secundario);
+        }
+
+        /* Contenedor de la imagen principal */
+        .hero-image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 50px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ajuste perfecto para la imagen hero */
+        .hero-image-container img {
+            max-width: 100%;
+            height: auto;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: inline-block;
-            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid var(--secundario);
         }
-        h1 { color: #333; }
-        h2 { color: #555; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 10px 0; font-size: 18px; }
-        strong { color: #0056b3; }
+
+        /* Secciones Principales */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primario);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primario), var(--secundario));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Sobre Nosotros */
+        .sobre-nosotros {
+            background-color: var(--blanco);
+            text-align: center;
+        }
+
+        .equipo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .miembro {
+            padding: 30px;
+            background-color: var(--fondo-claro);
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            transition: transform 0.3s;
+        }
+
+        .miembro:hover {
+            transform: translateY(-5px);
+        }
+
+        .miembro-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--secundario);
+            color: var(--primario);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .miembro h3 {
+            margin: 10px 0 5px;
+            color: var(--primario);
+            font-size: 1.2rem;
+        }
+
+        .miembro p {
+            margin: 0;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* Nuestro Proyecto */
+        .proyecto {
+            background-color: var(--primario);
+            color: var(--blanco);
+        }
+
+        .proyecto .section-title {
+            color: var(--blanco);
+        }
+
+        .proyecto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .proyecto-text h3 {
+            color: var(--secundario);
+            font-size: 28px;
+            margin-top: 0;
+        }
+
+        /* Contenedor de la segunda imagen */
+        .proyecto-image-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .proyecto-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid var(--secundario);
+        }
+
+        .bullet-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .bullet-list li::before {
+            content: '💧';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #001A3D;
+            color: #AAA;
+            padding: 30px 10%;
+            text-align: center;
+            border-top: 1px solid #111;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .proyecto-grid {
+                grid-template-columns: 1fr;
+            }
+            header {
+                padding: 15px 20px;
+                width: calc(100% - 40px);
+            }
+            nav ul {
+                gap: 15px;
+            }
+            nav a {
+                font-size: 14px;
+            }
+            .hero {
+                padding: 120px 5% 60px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Aburrá Physics</h1>
-        <h2>Cátedra: Física de las Grandes Ideas</h2>
-        <hr>
-        <h3>Integrantes del Equipo:</h3>
-        <ul>
-            <li><strong>CEO:</strong> Oswaldo Andrés Angulo Hoyos</li>
-            <li><strong>Director Científico:</strong> Lucas Osorno Ospina</li>
-            <li><strong>Directora Financiera:</strong> Ana Sofía Serna Zapata</li>
-            <li><strong>Director Creativo:</strong> Juan José Stabilito Torres</li>
-        </ul>
-    </div>
+    <header>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            Aburrá Physics
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#sobre-nosotros">Equipo</a></li>
+                <li><a href="#proyecto">Proyecto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <h1>Aburrá Physics: <span class="highlight">Levitación Hidrodinámica</span></h1>
+        <p>Redefiniendo el movimiento a través de la física de fluidos. Una exploración lúdica de la estabilidad y la fuerza.</p>
+
+        <div class="hero-image-container">
+            <img src="experimental.jpg" alt="Visualización del Prototipo de Levitación Hidrodinámica">
+        </div>
+    </section>
+
+    <section id="sobre-nosotros" class="sobre-nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <p>Somos un equipo multidisciplinario de la cátedra 'Física de las Grandes Ideas', dedicados a materializar conceptos complejos en soluciones innovadoras.</p>
+
+        <div class="equipo-container">
+            <div class="miembro">
+                <div class="miembro-icon">OA</div>
+                <h3>Oswaldo Andrés Angulo Hoyos</h3>
+                <p>CEO</p>
+            </div>
+            <div class="miembro">
+                <div class="miembro-icon">LO</div>
+                <h3>Lucas Osorno Ospina</h3>
+                <p>Director Científico</p>
+            </div>
+            <div class="miembro">
+                <div class="miembro-icon">AS</div>
+                <h3>Ana Sofía Serna Zapata</h3>
+                <p>Directora Financiera</p>
+            </div>
+            <div class="miembro">
+                <div class="miembro-icon">JS</div>
+                <h3>Juan José Stabilito Torres</h3>
+                <p>Director Creativo</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyecto" class="proyecto">
+        <h2 class="section-title">Nuestro Proyecto Científico</h2>
+
+        <div class="proyecto-grid">
+            <div class="proyecto-text">
+                <h3>Vórtice Levitador ABI</h3>
+                <p>Nuestro proyecto se centra en el diseño y construcción de un 'juguete científico' que demuestra el principio de la levitación hidrodinámica. Este dispositivo utiliza un vórtice de agua controlado para suspender objetos en un estado de equilibrio estable.</p>
+
+                <ul class="bullet-list">
+                    <li>Demostración visual de la dinámica de fluidos.</li>
+                    <li>Estabilidad lograda sin contacto mecánico.</li>
+                    <li>Exploración de la fuerza de sustentación y el flujo laminar.</li>
+                    <li>Configuraciones para levitar tanto esferas como anillos/discos.</li>
+                </ul>
+            </div>
+
+            <div class="proyecto-image-container">
+                <img src="prototipo.png" alt="Montaje experimental del proyecto">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Aburrá Physics. Todos los derechos reservados.</p>
+        <p>Cátedra: Física de las Grandes Ideas</p>
+    </footer>
 
 </body>
 </html>
