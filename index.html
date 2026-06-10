@@ -320,10 +320,47 @@
         .galeria-item img {
             width: 100%;
             height: 220px;
-            object-fit: contain;
-            background-color: var(--blanco);
+            object-fit: cover;
             display: block;
+            cursor: zoom-in;
         }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.activo { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            object-fit: contain;
+        }
+
+        .lightbox-cerrar {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            font-size: 38px;
+            color: var(--blanco);
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .lightbox-cerrar:hover { opacity: 1; }
 
         .galeria-item p {
             margin: 0;
@@ -745,25 +782,25 @@
 
         <div class="galeria-grid">
             <div class="galeria-item">
-                <img src="imagenes/Anclaje.jpg" alt="Anclaje guía en media luna">
+                <img src="imagenes/Anclaje.jpg" alt="Anclaje guía en media luna" onclick="abrirLightbox(this)">
                 <p>Anclaje guía en media luna</p>
             </div>
             <div class="galeria-item">
-                <img src="imagenes/Aro.jpg" alt="Aro flotante con álabes internos">
+                <img src="imagenes/Aro.jpg" alt="Aro flotante con álabes internos" onclick="abrirLightbox(this)">
                 <p>Aro flotante con álabes internos</p>
             </div>
             <div class="galeria-item">
-                <img src="imagenes/Base.jpg" alt="Base hidráulica">
+                <img src="imagenes/Base.jpg" alt="Base hidráulica" onclick="abrirLightbox(this)">
                 <p>Base hidráulica</p>
             </div>
             <div class="galeria-item">
-                <img src="imagenes/Boquillas.jpg" alt="Boquillas intercambiables v1 y v2">
+                <img src="imagenes/Boquillas.jpg" alt="Boquillas intercambiables v1 y v2" onclick="abrirLightbox(this)">
                 <p>Boquillas intercambiables v1 y v2</p>
             </div>
         </div>
 
         <div class="galeria-montaje galeria-item" style="max-width:500px; margin:20px auto 0;">
-            <img src="imagenes/Montaje.jpg" alt="Ensamble completo del sistema">
+            <img src="imagenes/Montaje.jpg" alt="Ensamble completo del sistema" onclick="abrirLightbox(this)">
             <p>Ensamble completo del sistema hidrodinámico</p>
         </div>
     </section>
@@ -956,6 +993,28 @@
             <li>Cátedra José Celestino Mutis. (2026). <em>Proyecto final de cátedra: Física — Documento de rúbrica de evaluación y lineamientos del proyecto</em>. Universidad Nacional de Colombia.</li>
         </ul>
     </section>
+
+    <!-- ══════════ LIGHTBOX ══════════ -->
+    <div id="lightbox" class="lightbox" onclick="cerrarLightbox()">
+        <button class="lightbox-cerrar" onclick="cerrarLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        function abrirLightbox(img) {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-img').alt = img.alt;
+            document.getElementById('lightbox').classList.add('activo');
+        }
+
+        function cerrarLightbox() {
+            document.getElementById('lightbox').classList.remove('activo');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') cerrarLightbox();
+        });
+    </script>
 
     <footer>
         <p>&copy; 2026 Aburrá Physics. Todos los derechos reservados.</p>
